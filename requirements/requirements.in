@@ -1,0 +1,6 @@
+pandas
+SQLAlchemy
+requests
+beautifulsoup4
+fastapi
+-e ./src/

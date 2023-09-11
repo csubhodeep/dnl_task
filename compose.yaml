@@ -1,7 +1,15 @@
+version: '3'
 services:
-  web:
-    build: .
-    ports:
-      - "8000:5000"
-  redis:
-    image: "redis:alpine"
+  db:
+    build: ./ops_utils/db.Dockerfile
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: mydatabase
+  etl:
+    build: ./ops_utils/etl.Dockerfile
+    depends_on:
+      - db
+  api:
+    build: ./ops_utils/api.Dockerfile
+    depends_on:
+      - db

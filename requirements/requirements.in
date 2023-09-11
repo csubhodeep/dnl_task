@@ -3,4 +3,7 @@ SQLAlchemy
 requests
 beautifulsoup4
 fastapi
--e ./src/
+pydantic
+uvicorn # this does not come with fastapi
+PyMySQL
+-e file:src/

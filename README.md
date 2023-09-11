@@ -19,14 +19,13 @@ Do data extraction of a static website:
 
 ## For running the application
 
-This application is made of 3 services:
+This application is made of 3 micro-services:
 1. A web scraper service that scrapes the data from the website and stores it in a database.
 2. A database service that stores the scraped data.
-3. A web service that exposes the scraped data through an API.
+3. A web service that exposes the scraped data stored in the database through an API endpoint.
 
 Hence, to start the application we need to start all the 3 services.
-This should be done using [`docker-compose`](https://docs.docker.com/compose/):
-
+This should be done using [`docker-compose`](https://docs.docker.com/compose/) as following:
 ```bash
 docker-compose up
 ```
@@ -74,4 +73,10 @@ pip-sync requirements/requirements-dev.txt
 
 ```bash
 pre-commit install
+```
+
+6. Check if everything works by running the tests (from the root of the project):
+
+```bash
+pytest
 ```

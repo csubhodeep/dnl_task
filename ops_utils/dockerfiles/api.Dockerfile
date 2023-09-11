@@ -1,5 +1,5 @@
 # Refs - https://fastapi.tiangolo.com/deployment/docker/#dockerfile
-FROM python:3.9
+FROM python:3.10-slim-bullseye
 
 WORKDIR /code
 

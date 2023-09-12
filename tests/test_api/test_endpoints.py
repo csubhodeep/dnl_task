@@ -9,7 +9,7 @@ def test_import():
         pytest.fail("Could not import entrypoint module")
 
 
-def test_read_root(client):
+def test_read_root(client, populated_db, test_data_df):
     response = client.get("/")
     assert response.status_code == 200
-    assert response.json() == {"msg": "Hello World"}
+    assert response.json() == test_data_df.to_dict(orient="records")

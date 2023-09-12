@@ -4,10 +4,13 @@ from sqlalchemy import Column
 from sqlalchemy import DateTime
 from sqlalchemy import Integer
 from sqlalchemy import String
-from webscraper.db.init_db import Base
+
+from sqlalchemy.orm import declarative_base
+
+Base = declarative_base()
 
 
-class Parts(Base):
+class Parts(Base):  # type: ignore
     __tablename__ = "parts"
 
     id = Column(Integer, primary_key=True)

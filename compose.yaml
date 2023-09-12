@@ -1,15 +1,29 @@
 version: '3'
 services:
   db:
-    build: ./ops_utils/db.Dockerfile
+    build:
+      context: .
+      dockerfile: ./ops_utils/dockerfiles/db.Dockerfile
     environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: mydatabase
+      MYSQL_DATABASE: urparts
+      MYSQL_USER: example_user
+      MYSQL_PASSWORD: example_password
+      MYSQL_ROOT_PASSWORD: example_root_password
   etl:
-    build: ./ops_utils/etl.Dockerfile
+    build:
+      context: .
+      dockerfile: ./ops_utils/dockerfiles/etl.Dockerfile
     depends_on:
       - db
   api:
-    build: ./ops_utils/api.Dockerfile
+    build:
+      context: .
+      dockerfile: ./ops_utils/dockerfiles/api.Dockerfile
+    ports:
+      - "8080:80"
+    environment:
+      MYSQL_DATABASE: urparts
+      MYSQL_USER: example_user
+      MYSQL_PASSWORD: example_password
     depends_on:
       - db

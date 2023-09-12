@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from datetime import datetime
 
 from sqlalchemy import Column
@@ -10,7 +8,7 @@ from webscraper.db.init_db import Base
 
 
 class Parts(Base):
-    __tablename__ = 'parts'
+    __tablename__ = "parts"
 
     id = Column(Integer, primary_key=True)
     timestamp_utc = Column(DateTime, default=datetime.utcnow())

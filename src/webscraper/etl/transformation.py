@@ -4,4 +4,4 @@ import pandas as pd
 
 
 def transform(raw_data: dict) -> pd.DataFrame:
-    print('Transforming...')
+    print("Transforming...")

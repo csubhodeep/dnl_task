@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 import pytest
 
 
@@ -8,4 +6,4 @@ def test_import():
     try:
         from webscraper.etl.pipeline import run_pipeline
     except (ImportError, ModuleNotFoundError):
-        pytest.fail('Could not import entrypoint module')
+        pytest.fail("Could not import entrypoint module")

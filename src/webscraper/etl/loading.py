@@ -4,4 +4,4 @@ import pandas as pd
 
 
 def load(data: pd.DataFrame):
-    print('Loading data to database...')
+    print("Loading data to database...")

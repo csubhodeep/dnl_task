@@ -1,17 +1,15 @@
 import os
+from typing import Any
 
+import pandas as pd
+import sqlalchemy
 from fastapi import Depends
 from fastapi import FastAPI
-import sqlalchemy
 from webscraper.api.models import Part
-
 from webscraper.db.tables import Base
 from webscraper.db.init_db import get_engine
 from webscraper.utils.params import SQLALCHEMY_DATABASE_URL
 
-from typing import Any
-
-import pandas as pd
 
 app = FastAPI()
 

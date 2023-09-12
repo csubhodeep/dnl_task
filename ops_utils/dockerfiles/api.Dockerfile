@@ -1,12 +1,21 @@
 # Refs - https://fastapi.tiangolo.com/deployment/docker/#dockerfile
 FROM python:3.10-slim-bullseye
 
-WORKDIR /code
+RUN apt-get update \
+    && apt-get install -y make \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
-COPY ../../requirements/requirements.txt /code/requirements.txt
+WORKDIR /app
 
-COPY ../setenv.mk /code/setenv.mk
+COPY ./requirements/requirements.txt /app/requirements/requirements.txt
+
+COPY ./src /app/src
+
+ADD ./ops_utils/setenv.mk /app/setenv.mk
+
+ADD ./ops_utils/run_api.mk /app/run_api.mk
 
 RUN make -f setenv.mk
 
-CMD ["uvicorn", "webscraper.api.endpoints:app", "--host", "0.0.0.0", "--port", "80"]
+CMD ["make", "-f", "run_api.mk"]

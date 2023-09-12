@@ -5,5 +5,5 @@ beautifulsoup4
 fastapi
 pydantic
 uvicorn # this does not come with fastapi
-PyMySQL
+PyMySQL[rsa]
 -e file:src/

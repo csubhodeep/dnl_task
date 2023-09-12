@@ -1,7 +1,4 @@
 import pandas as pd
-import pytest
-
-import datetime
 
 from webscraper.db.tables import Base
 

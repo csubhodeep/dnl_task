@@ -1,14 +1,9 @@
+import pandas as pd
 import pytest
-
 import sqlalchemy
+from fastapi.testclient import TestClient
 from webscraper.db.init_db import get_engine
 from webscraper.api.endpoints import app
-
-from fastapi.testclient import TestClient
-
-import pandas as pd
-
-import datetime
 
 
 @pytest.fixture(scope="function")

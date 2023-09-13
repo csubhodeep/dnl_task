@@ -7,6 +7,14 @@ from urllib.request import urlopen, Request
 
 from bs4 import BeautifulSoup
 
+import json
+
+import functools
+
+from webscraper.utils.params import DATA_PATH
+
+import uuid
+
 
 def open_page(url: str) -> str | None:
     logger.info(f"Opening page: {url}...")
@@ -80,22 +88,40 @@ def get_man_cat_mdl_urls(url: str, n_pages: int | None) -> list[str]:
     return man_cat_mdl_url_list
 
 
-def extract_part_numbers(url: str) -> dict[str, list[str]]:
+def extract_part_numbers(
+    url: str, persist: bool = False
+) -> dict[str, list[str]] | None:
     html_page = open_page(url)
     if not html_page:
-        return {url: []}
-    part_numbers = parse_part_numbers(html_page)
-    return {url: part_numbers}
+        res = {url: []}  # type: ignore
+    else:
+        res = {url: parse_part_numbers(html_page)}  # type: ignore
+
+    if persist:
+        scraped_data_path = DATA_PATH / "scraped"
+        scraped_data_path.mkdir(exist_ok=True)
+        with open(scraped_data_path / f"{uuid.uuid4().hex}.json", "w") as f:
+            json.dump([res], f)
+        return None
+    else:
+        return res
 
 
-def scrape(url: str, n_pages: int | None = None) -> list[dict[str, list[str]]]:
+def scrape(
+    url: str, n_pages: int | None = None, persist: bool = False
+) -> list[dict[str, list[str]] | None]:
     logger.info(f"Scraping data from: {url}...")
     # iterate over all manufacturers and create a list of pages to scrape
     url_list = get_man_cat_mdl_urls(url, n_pages)
 
     res = []
     with ThreadPoolExecutor() as executor:
-        jobs = (executor.submit(extract_part_numbers, url) for url in url_list)
+        jobs = (
+            executor.submit(
+                functools.partial(extract_part_numbers, persist=persist), url
+            )
+            for url in url_list
+        )
         for ftr in as_completed(jobs):
             res.append(ftr.result())
 

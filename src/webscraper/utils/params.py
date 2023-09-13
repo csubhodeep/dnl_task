@@ -1,4 +1,5 @@
 import os
+import pathlib
 
 BASE_URL = "https://www.urparts.com/index.cfm/page/catalogue"
 
@@ -16,3 +17,8 @@ SQLALCHEMY_DATABASE_URL = (
 )
 
 TABLE_NAME = "parts"
+
+BASE_PATH = pathlib.Path(__file__).parent.parent.parent.parent
+
+DATA_PATH = BASE_PATH / "data"
+DATA_PATH.mkdir(exist_ok=True)

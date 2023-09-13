@@ -1,9 +1,11 @@
-import pandas as pd
-
 from webscraper.db.tables import Base
+
+from sqlalchemy.inspection import inspect
 
 
 def test_create_table(db_engine):
     Base.metadata.create_all(db_engine)
 
-    assert db_engine.has_table("parts")
+    inspector = inspect(db_engine)
+
+    assert inspector.has_table("parts")

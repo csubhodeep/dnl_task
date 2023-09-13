@@ -49,11 +49,11 @@ def parse_manufacturers(html_page: str) -> list[str]:
     return [element.replace(" ", "%20") for element in manufacturers]
 
 
-def get_man_cat_mdl_urls(url: str) -> list[str]:
+def get_man_cat_mdl_urls(url: str, n_pages: int | None) -> list[str]:
     html_page = open_page(url)
     if not html_page:
         return []
-    manufacturers = parse_manufacturers(html_page)
+    manufacturers = parse_manufacturers(html_page)[:n_pages]
     man_url_list = [urljoin(f"{url}/", manufacturer) for manufacturer in manufacturers]
     man_cat_mdl_url_list = []
     # iterate over all manufacturers and create a list of pages to scrape
@@ -88,10 +88,10 @@ def extract_part_numbers(url: str) -> dict[str, list[str]]:
     return {url: part_numbers}
 
 
-def scrape(url: str):
+def scrape(url: str, n_pages: int | None = None) -> list[dict[str, list[str]]]:
     logger.info(f"Scraping data from: {url}...")
     # iterate over all manufacturers and create a list of pages to scrape
-    url_list = get_man_cat_mdl_urls(url)
+    url_list = get_man_cat_mdl_urls(url, n_pages)
 
     res = []
     with ThreadPoolExecutor() as executor:

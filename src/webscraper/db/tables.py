@@ -1,3 +1,4 @@
+from webscraper.utils.params import TABLE_NAME
 from datetime import datetime
 
 from sqlalchemy import Column
@@ -10,7 +11,7 @@ Base = declarative_base()
 
 
 class Parts(Base):  # type: ignore
-    __tablename__ = "parts"
+    __tablename__ = TABLE_NAME
 
     id = Column(Integer, primary_key=True)
     load_timestamp_utc = Column(DateTime, default=datetime.utcnow())

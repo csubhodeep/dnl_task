@@ -11,8 +11,10 @@ def transform(raw_data: list[dict[str, list[str]]]) -> pd.DataFrame:
         url, parts = entry.popitem()
         _, info = url.split("/catalogue/")
         manufacturer, category, model = info.split("/")
-        # FIXME: this could be unsafe
+        # FIXME: these could be unsafe
+        manufacturer = manufacturer.replace("%20", " ")
         category = category.replace("%20", " ")
+        model = model.replace("%20", " ")
         for part in parts:
             records.append(
                 {

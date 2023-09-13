@@ -1,7 +1,15 @@
+import sys
+
+from loguru import logger
+
 from webscraper.etl.extraction import scrape
 from webscraper.etl.loading import load
 from webscraper.etl.transformation import transform
 from webscraper.utils.params import BASE_URL
+
+logger.remove()
+
+logger.add(sys.stdout, level="INFO")
 
 
 def run_pipeline():
@@ -9,6 +17,7 @@ def run_pipeline():
     This version would only work if all the scraped data can fit into the memory at once.
     :return:
     """
+    logger.info("Running ETL pipeline...")
     data = scrape(BASE_URL)
     df = transform(data)
     load(df)

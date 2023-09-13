@@ -1,8 +1,9 @@
 import pandas as pd
+from loguru import logger
 
 
 def transform(raw_data: list[dict[str, list[str]]]) -> pd.DataFrame:
-    print("Transforming...")
+    logger.info("Transforming raw data...")
 
     records = []
     # the below can be parallelized but skipping it for now

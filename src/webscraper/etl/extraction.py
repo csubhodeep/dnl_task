@@ -12,7 +12,7 @@ from webscraper.utils.params import DATA_PATH
 
 
 def open_page(url: str) -> str | None:
-    logger.info(f"Opening page: {url}...")
+    logger.debug(f"Opening page: {url}...")
     req = Request(url)
     req.add_header("User-Agent", "Mozilla/5.0")
     try:
@@ -105,10 +105,12 @@ def extract_part_numbers(
 def scrape(
     url: str, n_pages: int | None = None, persist: bool = False
 ) -> list[dict[str, list[str]] | None]:
-    logger.info(f"Scraping data from: {url}...")
-    # iterate over all manufacturers and create a list of pages to scrape
+    logger.info(f"Scraping data from: {url}")
+
+    logger.info("Extracting manufacturers, categories and models ...")
     url_list = get_man_cat_mdl_urls(url, n_pages)
 
+    logger.info("Extracting part numbers ...")
     res = []
     with ThreadPoolExecutor() as executor:
         jobs = (

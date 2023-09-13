@@ -22,7 +22,7 @@ def get_db_engine() -> sqlalchemy.engine.Engine:
 
 
 @app.get("/", response_model=list[Part])
-async def read_root(
+async def read_data(
     db_engine: sqlalchemy.engine.Engine = Depends(get_db_engine),
     manufacturer: str | None = None,
 ) -> Any:

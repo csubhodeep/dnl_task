@@ -1,5 +1,5 @@
-from webscraper.utils.params import TABLE_NAME
 from webscraper.etl.loading import load
+from webscraper.utils.params import TABLE_NAME
 
 
 def test_insert_records(db_engine, test_data_df, mock_env):

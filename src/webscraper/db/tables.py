@@ -1,4 +1,3 @@
-from webscraper.utils.params import TABLE_NAME
 from datetime import datetime
 
 from sqlalchemy import Column
@@ -6,6 +5,8 @@ from sqlalchemy import DateTime
 from sqlalchemy import Integer
 from sqlalchemy import String
 from sqlalchemy.orm import declarative_base
+from webscraper.utils.params import TABLE_NAME
+
 
 Base = declarative_base()
 

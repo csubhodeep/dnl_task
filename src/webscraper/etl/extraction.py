@@ -1,19 +1,14 @@
+import functools
+import json
+import uuid
 from concurrent.futures import ThreadPoolExecutor, as_completed
-
-from loguru import logger
 from urllib.error import URLError
 from urllib.parse import urljoin
 from urllib.request import urlopen, Request
 
 from bs4 import BeautifulSoup
-
-import json
-
-import functools
-
+from loguru import logger
 from webscraper.utils.params import DATA_PATH
-
-import uuid
 
 
 def open_page(url: str) -> str | None:

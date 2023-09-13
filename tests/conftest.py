@@ -2,8 +2,8 @@ import pandas as pd
 import pytest
 import sqlalchemy
 from fastapi.testclient import TestClient
-from webscraper.db.init_db import get_engine
 from webscraper.api.endpoints import app
+from webscraper.db.init_db import get_engine
 
 
 @pytest.fixture(scope="function")

@@ -1,7 +1,6 @@
-import pandas as pd
-
 import os
 
+import pandas as pd
 from webscraper.db.init_db import get_engine
 from webscraper.utils.params import SQLALCHEMY_DATABASE_URL, TABLE_NAME
 

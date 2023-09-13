@@ -63,7 +63,6 @@ def get_man_cat_mdl_urls(url: str, n_pages: int | None) -> list[str]:
     for man_url in man_url_list:
         html_page = open_page(man_url)
         if not html_page:
-            categories = []
             continue
         categories = parse_categories(html_page)
         # iterate over all categories and create a list of pages to scrape
@@ -72,7 +71,6 @@ def get_man_cat_mdl_urls(url: str, n_pages: int | None) -> list[str]:
         for man_cat_url in man_cat_url_list:
             html_page = open_page(man_cat_url)
             if not html_page:
-                models = []
                 continue
             models = parse_models(html_page)
             # iterate over all models and create a list of pages to scrape

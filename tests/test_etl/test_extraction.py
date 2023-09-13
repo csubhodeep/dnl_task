@@ -1,15 +1,15 @@
 import pytest
 
 from webscraper.etl.extraction import (
+    open_page,
     parse_manufacturers,
     parse_categories,
     parse_models,
     parse_part_numbers,
+    scrape,
 )
 from webscraper.utils.params import BASE_URL
-from webscraper.etl.extraction import open_page
-
-from urllib.parse import urljoin
+from urllib.parse import urljoin, urlparse
 
 
 @pytest.fixture(scope="function")
@@ -62,3 +62,15 @@ def test_parse_part_numbers(part_html_page: str):
     assert isinstance(part_numbers, list)
     assert len(part_numbers) > 0
     assert part_numbers[0] not in ["", None]
+
+
+def test_scrape():
+    res = scrape(BASE_URL, 2)
+    assert isinstance(res, list)
+    assert len(res) > 0
+    assert isinstance(res[0], dict)
+    url, parts = res[0].popitem()
+    parsed_url = urlparse(url)
+    assert all([parsed_url.netloc, parsed_url.scheme])
+    assert parsed_url.netloc == urlparse(BASE_URL).netloc
+    assert isinstance(parts, list)

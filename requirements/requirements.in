@@ -6,4 +6,5 @@ fastapi
 pydantic
 uvicorn # this does not come with fastapi
 PyMySQL[rsa]
+loguru
 -e file:src/

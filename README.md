@@ -48,25 +48,25 @@ pip3 install pip-tools==7.3.0
 pip-compile requirements/requirements.in && pip-compile requirements/requirements-dev.in
 ```
 
-4. Install the dependencies:
+5. Install the dependencies:
 
 ```bash
 pip-sync requirements/requirements-dev.txt
 ```
 
-5. Install the pre-commit hooks:
+6. Install the pre-commit hooks:
 
 ```bash
 pre-commit install
 ```
 
-6. Check if everything works by running the tests (ideally all tests should pass):
+7. Check if everything works by running the tests (ideally all tests should pass):
 
 ```bash
 pytest
 ```
 
-7. (Optional) For triggering a fresh build before running the conatiners locally:
+8. (Optional) For triggering a fresh build before running the containers locally:
 
 ```bash
 docker compose up --build --no-cache

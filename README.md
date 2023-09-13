@@ -1,23 +1,14 @@
-# Task description
-
-## Web scraping
-Do data extraction of a static website:
-1. Scrape a static website.
-2. Look at https://www.urparts.com/index.cfm/page/catalogue.
-3. Check for a manufacturer, then look into the categories, then the models and the result-set where you find the part number before ‘ - ‘ and the part category.
-4. Scrape the whole catalog from the website and load it into a database.
-6. Scraper should run as fast as possible through the whole page.
+# Web scraper
+This is a basic webscraper application made of 3 micro-services:
+1. A web scraper service that scrapes the data from the website and stores it in a database.
+2. A database service that stores the data scraped by the scraper service.
+3. A web service that exposes the scraped data stored in the database through a queryable API endpoint.
 
 # Instructions
 
 ## For running the application
 
-This application is made of 3 micro-services:
-1. A web scraper service that scrapes the data from the website and stores it in a database.
-2. A database service that stores the data scraped by the scraper service.
-3. A web service that exposes the scraped data stored in the database through a queryable API endpoint.
-
-Hence, to start the application we need to start all the 3 services.
+To start the application we need to start all the 3 services.
 This should be done using [`docker-compose`](https://docs.docker.com/compose/) as following:
 ```bash
 docker compose up

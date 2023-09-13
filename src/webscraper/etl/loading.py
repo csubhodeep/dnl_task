@@ -14,11 +14,10 @@ def load(data: pd.DataFrame):
     db_engine = get_engine(url)
 
     inspector = sa.inspect(db_engine)
-    if inspector.has_table(TABLE_NAME):
-        logger.info(f"Table '{TABLE_NAME}' already exists, appending data...")
-    else:
+    if not inspector.has_table(TABLE_NAME):
         logger.info(f"Table '{TABLE_NAME}' does not exist, creating it...")
         Base.metadata.create_all(db_engine)
         assert inspector.has_table(TABLE_NAME), f"Table '{TABLE_NAME}' not created"
 
+    data["load_timestamp_utc"] = pd.Timestamp.utcnow()
     data.to_sql(TABLE_NAME, db_engine, if_exists="append", index=False)

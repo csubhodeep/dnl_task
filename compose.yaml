@@ -5,6 +5,7 @@ services:
       context: .
       dockerfile: ./ops_utils/dockerfiles/db.Dockerfile
     environment:
+      # TODO: these should be passed via CI/CD build environment
       MYSQL_DATABASE: urparts
       MYSQL_USER: example_user
       MYSQL_PASSWORD: example_password
@@ -14,7 +15,8 @@ services:
       context: .
       dockerfile: ./ops_utils/dockerfiles/etl.Dockerfile
     depends_on:
-      - db
+      db:
+        condition: service_started
   api:
     build:
       context: .
@@ -26,4 +28,7 @@ services:
       MYSQL_USER: example_user
       MYSQL_PASSWORD: example_password
     depends_on:
-      - db
+      db:
+        condition: service_started # healthcheck should also be checked but we are ignoring it to limit the scope of this task
+      etl:
+        condition: service_completed_successfully

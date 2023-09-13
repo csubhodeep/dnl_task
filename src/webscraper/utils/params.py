@@ -14,3 +14,5 @@ DB_NAME = os.getenv("MYSQL_DATABASE", "urparts")
 SQLALCHEMY_DATABASE_URL = (
     f"{DIALECT}+{DRIVER}://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 )
+
+TABLE_NAME = "parts"

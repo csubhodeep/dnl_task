@@ -20,7 +20,7 @@ This application is made of 3 micro-services:
 Hence, to start the application we need to start all the 3 services.
 This should be done using [`docker-compose`](https://docs.docker.com/compose/) as following:
 ```bash
-docker-compose up
+docker compose up
 ```
 
 ## For setting up the dev environment
@@ -69,8 +69,14 @@ pip-sync requirements/requirements-dev.txt
 pre-commit install
 ```
 
-6. Check if everything works by running the tests:
+6. Check if everything works by running the tests (ideally all tests should pass):
 
 ```bash
 pytest
+```
+
+7. (Optional) For triggering a fresh build before running the conatiners locally:
+
+```bash
+docker compose up --build --no-cache
 ```

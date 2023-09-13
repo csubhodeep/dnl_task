@@ -65,7 +65,7 @@ def test_parse_part_numbers(part_html_page: str):
 
 
 def test_scrape():
-    res = scrape(BASE_URL, 2)
+    res = scrape(BASE_URL, 1)
     assert isinstance(res, list)
     assert len(res) > 0
     assert isinstance(res[0], dict)

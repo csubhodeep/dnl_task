@@ -1,7 +1,7 @@
 import functools
 import json
+import multiprocessing
 import uuid
-from concurrent.futures import ThreadPoolExecutor, as_completed
 from urllib.error import URLError
 from urllib.parse import urljoin
 from urllib.request import urlopen, Request
@@ -109,15 +109,10 @@ def scrape(
     url_list = get_man_cat_mdl_urls(url, n_pages)
 
     logger.info("Extracting part numbers ...")
-    res = []
-    with ThreadPoolExecutor() as executor:
-        jobs = (
-            executor.submit(
-                functools.partial(extract_part_numbers, persist=persist), url
-            )
-            for url in url_list
+
+    with multiprocessing.Pool() as pool:
+        res = pool.map(
+            functools.partial(extract_part_numbers, persist=persist), url_list
         )
-        for ftr in as_completed(jobs):
-            res.append(ftr.result())
 
     return res

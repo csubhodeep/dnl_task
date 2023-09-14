@@ -79,6 +79,11 @@ pre-commit install
 ```bash
 pytest
 ```
+Altenatiively you could run the test with coverage:
+
+```bash
+pytest --cov=src
+```
 
 8. (Optional) For triggering a fresh build before running the containers locally:
 

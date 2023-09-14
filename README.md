@@ -17,7 +17,8 @@ docker compose up
 
 
 A few points regarding the design of the application:
-1. The API service would only start after the ETL service has finished executing successfully.
+1. The API service would only start after the ETL service has finished executing successfully. Ideally, the ETL service
+usually takes 5-10 mins to finish.
 2. The ETL and API service both depend on the DB service, so they would only start after the DB service has started.
 
 After the API service is live you should be able to check the Swagger docs and try out querying the endpoint
@@ -79,7 +80,7 @@ pre-commit install
 ```bash
 pytest
 ```
-Altenatiively you could run the test with coverage:
+Alternatively you could run the test with coverage:
 
 ```bash
 pytest --cov=src

@@ -10,6 +10,7 @@ from webscraper.utils.params import SQLALCHEMY_DATABASE_URL, TABLE_NAME
 
 
 def load(data: pd.DataFrame):
+    # inject config during runtime
     url = os.getenv("SQLALCHEMY_DATABASE_URL", SQLALCHEMY_DATABASE_URL)
     logging.info(f"Connecting to database at {url}...")
     db_engine = get_engine(url)

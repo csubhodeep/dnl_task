@@ -4,6 +4,7 @@ from webscraper.utils.params import TABLE_NAME
 
 
 def test_create_table(db_engine):
+    # test if table can be created
     Base.metadata.create_all(db_engine)
 
     inspector = inspect(db_engine)

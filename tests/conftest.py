@@ -17,7 +17,7 @@ def mock_env(monkeypatch, path_to_db):
 
 
 @pytest.fixture(scope="function")
-def db_engine(path_to_db) -> sqlalchemy.engine.Engine:
+def db_engine(path_to_db):
     yield get_engine(f"sqlite:///{path_to_db}")
 
 

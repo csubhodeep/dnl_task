@@ -10,6 +10,7 @@ def test_import():
 
 
 def test_read_root(client, populated_db, test_data_df):
+    # test that the root endpoint returns the correct data from the DB
     response = client.get("/")
     assert response.status_code == 200
     assert response.json() == test_data_df.to_dict(orient="records")

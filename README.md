@@ -9,17 +9,31 @@ This is a basic webscraper application made of 3 micro-services:
 ## For running the application
 
 To start the application we need to start all the 3 services.
-This should be done using [`docker-compose`](https://docs.docker.com/compose/) as following:
+This should be done using [`docker-compose`](https://docs.docker.com/compose/) as following 
 ```bash
 docker compose up
 ```
+(it is assumed that you have `docker` (engine and CLI) and `docker-compose` installed)
+
+
+A few points regarding the design of the application:
+1. The API service would only start after the ETL service has finished executing successfully.
+2. The ETL and API service both depend on the DB service, so they would only start after the DB service has started.
+
+After the API service is live you should be able to check the Swagger docs and try out querying the endpoint
+under [`http://localhost:8080/docs`](http://localhost:8080/docs).
+
+Additionally, the DB service is also exposed at `localhost:3306`. One could also check the contents of the DB
+using a DB client (like MySQL Workbench or Jetbrains DataGrip). 
+
+To establish a connection please refer to the `compose.yaml` file for credentials.
 
 ## For setting up the dev environment
 
 This section outline how to initialize the development environment of the project that are required to run the applications
 on Docker.
 
-This project is built on **Python-3.10.12**. It manages its dependencies using [`pip-tools`](https://pip-tools.readthedocs.io/en/latest/).
+This project is built on **Python-3.10** and it manages its dependencies using [`pip-tools`](https://pip-tools.readthedocs.io/en/latest/).
 
 Follow the steps below and run the accompanying code snippets from the root of the project to set up the environment 
 (assuming you have `python3` and `python3-venv` installed):

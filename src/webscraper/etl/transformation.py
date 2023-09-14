@@ -3,6 +3,10 @@ from loguru import logger
 
 
 def transform(raw_data: list[dict[str, list[str]]]) -> pd.DataFrame:
+    """This function transforms the raw data into a dataframe.
+    :param raw_data: list of dictionaries containing the raw data
+    :return: dataframe containing the transformed data
+    """
     logger.info("Transforming raw data...")
 
     records = []

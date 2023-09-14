@@ -1,3 +1,4 @@
+import logging
 import os
 
 import pandas as pd
@@ -9,8 +10,8 @@ from webscraper.utils.params import SQLALCHEMY_DATABASE_URL, TABLE_NAME
 
 
 def load(data: pd.DataFrame):
-    logger.info("Loading data to database...")
     url = os.getenv("SQLALCHEMY_DATABASE_URL", SQLALCHEMY_DATABASE_URL)
+    logging.info(f"Connecting to database at {url}...")
     db_engine = get_engine(url)
 
     inspector = sa.inspect(db_engine)
@@ -20,4 +21,12 @@ def load(data: pd.DataFrame):
         assert inspector.has_table(TABLE_NAME), f"Table '{TABLE_NAME}' not created"
 
     data["load_timestamp_utc"] = pd.Timestamp.utcnow()
-    data.to_sql(TABLE_NAME, db_engine, if_exists="append", index=False)
+    logger.info("Loading data to database...")
+    data.to_sql(
+        TABLE_NAME,
+        db_engine,
+        if_exists="append",
+        index=False,
+        # bigger chunksize or setting this to None -> faster but leads to memory usage and OOM
+        chunksize=20_000,
+    )

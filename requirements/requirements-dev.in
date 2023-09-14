@@ -1,4 +1,6 @@
 -r requirements.txt
-pytest
-pre-commit
 httpx
+pre-commit
+pytest
+pytest-cov
+

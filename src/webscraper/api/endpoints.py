@@ -1,27 +1,15 @@
-import os
 from typing import Any
 
 import pandas as pd
 import sqlalchemy
+import uvicorn
 from fastapi import Depends
 from fastapi import FastAPI
 from webscraper.api.models import Part
-from webscraper.db.init_db import get_engine
-from webscraper.utils.params import SQLALCHEMY_DATABASE_URL, TABLE_NAME
+from webscraper.api.helpers import build_query, get_db_engine
 
 
 app = FastAPI()
-
-
-# Dependency
-def get_db_engine() -> sqlalchemy.engine.Engine:
-    """This function returns a database engine.
-    :return: A database engine.
-    """
-    # inject config during runtime
-    url = os.getenv("SQLALCHEMY_DATABASE_URL", SQLALCHEMY_DATABASE_URL)
-    db_engine = get_engine(url)
-    yield db_engine
 
 
 @app.get("/", response_model=list[Part])
@@ -47,16 +35,12 @@ async def read_data(
             ...
         ]
     """
-    if manufacturer is None:
-        query = f"SELECT * FROM {TABLE_NAME} LIMIT 5"
-    else:
-        query = f"""
-            SELECT * 
-            FROM {TABLE_NAME} 
-            WHERE manufacturer = '{manufacturer}'
-                AND model = '{model}'
-                AND category = '{category}'
-        """
+    query = build_query(manufacturer, model, category)
+
     df = pd.read_sql(query, db_engine)
 
     return df.to_dict(orient="records")
+
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8080)

@@ -7,7 +7,7 @@ DIALECT = "mysql"
 DRIVER = "pymysql"
 DB_USER = os.getenv("MYSQL_USER", "abcd")
 DB_PASSWORD = os.getenv("MYSQL_PASSWORD", "abcd")
-DB_HOST = os.getenv("DB_HOST", "db")  # same as in the compose.yml file
+DB_HOST = os.getenv("DB_HOST", "localhost")
 DB_PORT = os.getenv("DB_PORT", "3306")
 DB_NAME = os.getenv("MYSQL_DATABASE", "urparts")
 
@@ -21,4 +21,3 @@ TABLE_NAME = "parts"
 BASE_PATH = pathlib.Path(__file__).parent.parent.parent.parent
 
 DATA_PATH = BASE_PATH / "data"
-DATA_PATH.mkdir(exist_ok=True)

@@ -92,7 +92,7 @@ def extract_part_numbers(
 
     if persist:
         scraped_data_path = DATA_PATH / "scraped"
-        scraped_data_path.mkdir(exist_ok=True)
+        scraped_data_path.mkdir(exist_ok=True, parents=True)
         with open(scraped_data_path / f"{uuid.uuid4().hex}.json", "w") as f:
             json.dump([res], f)
         return None

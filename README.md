@@ -85,3 +85,59 @@ pytest
 ```bash
 docker compose up --build --no-cache
 ```
+
+### Directory structure
+
+The project is structured as follows:
+
+```shell
+.
+├── compose.yaml
+├── ops_utils
+│   ├── dockerfiles
+│   │   ├── api.Dockerfile
+│   │   ├── db.Dockerfile
+│   │   └── etl.Dockerfile
+│   ├── run_api.mk
+│   ├── run_etl.mk
+│   └── setenv.mk
+├── README.md
+├── requirements
+│   ├── requirements-dev.in
+│   ├── requirements-dev.txt
+│   ├── requirements.in
+│   └── requirements.txt
+├── src
+│   ├── pyproject.toml
+│   ├── README.md
+│   └── webscraper
+│       ├── api
+│       │   ├── endpoints.py
+│       │   ├── __init__.py
+│       │   └── models.py
+│       ├── db
+│       │   ├── init_db.py
+│       │   ├── __init__.py
+│       │   └── tables.py
+│       ├── etl
+│       │   ├── extraction.py
+│       │   ├── __init__.py
+│       │   ├── loading.py
+│       │   ├── pipeline.py
+│       │   └── transformation.py
+│       ├── __init__.py
+│       └── utils
+│           ├── __init__.py
+│           └── params.py
+└── tests
+    ├── conftest.py
+    ├── test_api
+    │   └── test_endpoints.py
+    ├── test_db
+    │   └── test_tables.py
+    └── test_etl
+        ├── test_extraction.py
+        ├── test_loading.py
+        ├── test_pipeline.py
+        └── test_transformation.py
+```

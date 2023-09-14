@@ -8,7 +8,8 @@ def test_build_query():
         "FROM xyz "
         "WHERE LOWER(manufacturer) = 'test_manufacturer' "
         "AND LOWER(model) = 'test_model' "
-        "AND LOWER(category) = 'test_category'"
+        "AND LOWER(category) = 'test_category' "
+        "LIMIT 10"
     )
 
     actual = build_query(
@@ -16,6 +17,7 @@ def test_build_query():
         model="test_model",
         category="test_category",
         table_name="xyz",
+        n_results=10,
     )
 
     assert actual == expected

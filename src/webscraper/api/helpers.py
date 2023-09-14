@@ -20,6 +20,7 @@ def build_query(
     model: str | None = None,
     category: str | None = None,
     table_name: str = TABLE_NAME,
+    n_results: int = 5,
 ) -> str:
     """This function builds a SQL query.
     :param manufacturer: The manufacturer of the parts.
@@ -35,10 +36,15 @@ def build_query(
     if category:
         where_conditions.append(f"LOWER(category) = '{category.lower()}'")
 
+    if n_results:
+        limit_query = f"LIMIT {n_results}"
+    else:
+        limit_query = ""
+
     if not where_conditions:
-        query = f"SELECT * FROM {table_name} LIMIT 5"
+        query = f"SELECT * FROM {table_name} {limit_query}"
     else:
         where_conditions = " AND ".join(where_conditions)
-        query = f"SELECT * FROM {table_name} WHERE {where_conditions}"
+        query = f"SELECT * FROM {table_name} WHERE {where_conditions} {limit_query}"
 
     return query

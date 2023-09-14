@@ -18,6 +18,7 @@ async def read_data(
     manufacturer: str | None = None,
     model: str | None = None,
     category: str | None = None,
+    n_results: int | None = 5,
 ) -> Any:
     """This endpoint returns a list of parts from the database.
     :param db_engine: The database engine.
@@ -35,7 +36,7 @@ async def read_data(
             ...
         ]
     """
-    query = build_query(manufacturer, model, category)
+    query = build_query(manufacturer, model, category, n_results=n_results)
 
     df = pd.read_sql(query, db_engine)
 

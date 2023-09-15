@@ -13,6 +13,13 @@ To run the ETL pipeline locally, run -
 python -m webscraper.etl.pipeline
 ```
 
+### Design
+
+This service is further divided into three steps:
+1. Extraction - this mainly involves scraping the web pages.
+2. Transformation - this involves cleaning up the data and transforming it into a format that is suitable for loading into the database.
+3. Loading - this involves loading the data into the database.
+
 
 ## Web scraper read-only API service
 

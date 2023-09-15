@@ -51,31 +51,37 @@ python3 -m venv ./venv
 source ven/bin/activate
 ```
 
-3. Install `pip-tools`:
+3. (Optional) Make sure you have the correct version of `pip` installed:
+
+```bash
+pip3 install --upgrade pip==23.2.1
+```
+
+4. Install `pip-tools`:
 
 ```bash
 pip3 install pip-tools==7.3.0
 ```
 
-4. (Optional) Compile the consolidated dependency specification (`txt`) files:
+5. (Optional) Compile the consolidated dependency specification (`txt`) files:
 
 ```bash
 pip-compile requirements/requirements.in && pip-compile requirements/requirements-dev.in
 ```
 
-5. Install the dependencies:
+6. Install the dependencies:
 
 ```bash
 pip-sync requirements/requirements-dev.txt
 ```
 
-6. Install the pre-commit hooks:
+7. Install the pre-commit hooks:
 
 ```bash
 pre-commit install
 ```
 
-7. Check if everything works by running the tests (ideally all tests should pass):
+8. Check if everything works by running the tests (ideally all tests should pass):
 
 ```bash
 pytest
@@ -86,7 +92,7 @@ Alternatively you could run the test with coverage:
 pytest --cov=src
 ```
 
-8. (Optional) For triggering a fresh build before running the containers locally:
+9. (Optional) For triggering a fresh build before running the containers locally:
 
 ```bash
 docker compose up --build --no-cache

@@ -1,6 +1,6 @@
 # Webscraper
 
-This contains the application code for the two of three services. Those are:
+This contains the Python application code for the two of three services. Those are:
 1. The web scraper ETL service.
 2. The web scraper read-only API service.
 
@@ -16,10 +16,18 @@ python -m webscraper.etl.pipeline
 
 ## Web scraper read-only API service
 
-This one lives under `api` directory. Therein, the main entrypoint is `app.py`.
+This one lives under `api` directory. Therein, the main entrypoint is `endpoints.py`.
 
 To run the API service locally (in dev mode), run - 
 
 ```bash
 uvicorn webscraper.api.endpoints:app --host 0.0.0.0 --port 8080 --reload
 ```
+
+ALternatively,
+
+```bash
+python3 -m webscraper.api.endpoints
+```
+
+P.S. the `uvicorn` command would enable hot-reloading. The `python3` command would not. 

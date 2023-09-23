@@ -48,7 +48,7 @@ python3 -m venv ./venv
 2. Activate the virtual environment:
 
 ```bash
-source ven/bin/activate
+source venv/bin/activate
 ```
 
 3. (Optional) Make sure you have the correct version of `pip` installed:
